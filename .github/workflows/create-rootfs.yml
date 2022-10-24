@@ -24,7 +24,7 @@ jobs:
       - name: Uploading rootfs as artifact
         uses: actions/upload-artifact@v2
         with:
-          name: fedora-35
+          name: popos-rootfs
           retention-days: 1
           path: |
             /tmp/popos-rootfs.tar.xz
