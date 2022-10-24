@@ -1,0 +1,55 @@
+name: Unsquashing + releasing pop os rootfs
+on:
+  push:
+    branches: [ "main" ]
+  schedule:
+    - cron: "10 0 * * *" # run at the start of every day after functions.py update
+  workflow_dispatch:
+
+jobs:
+  unpack-rootfs:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checking out repository code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+
+      - name: Installing dependencies
+        run: sudo apt-get install -y curl squashfs-tools
+
+      - name: Unpacking + Repacking popos rootfs
+        run: sudo python3 unpack_iso.py
+
+      - name: Uploading rootfs as artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: fedora-35
+          retention-days: 1
+          path: |
+            /tmp/popos-rootfs.tar.xz
+
+  create-release:
+    runs-on: ubuntu-22.04
+    needs: unpack-rootfs
+    steps:
+      - name: Downloading rootfs artifacts
+        uses: actions/download-artifact@v3
+        with:
+          path: /tmp/artifacts/
+
+      - name: Generating release tag
+        id: tag
+        run: |
+          echo "::set-output name=release_tag::$(date +"%Y.%m.%d_%H-%M")"
+
+      - name: Creating new release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ steps.tag.outputs.release_tag }}
+          name: Automated PopOS rootfs extraction - ${{ steps.tag.outputs.release_tag }}
+          body: |
+            These are completely **unmodified** popos rootfs archives for the depthboot builder script.  
+            Please download official images at https://pop.system76.com/
+          files: |
+            /tmp/artifacts/popos-rootfs.tar.xz
