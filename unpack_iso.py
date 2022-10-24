@@ -25,4 +25,4 @@ if __name__ == "__main__":
 
     print_status("Compressing rootfs")
     os.chdir(f"/tmp/pop-os/rootfs")
-    bash(f"tar -cv -I 'xz -9 -T0' -f ../popos-rootfs.tar.xz ./")
+    bash(f"tar -cv -I 'xz -9 -T0' -f ./popos-rootfs.tar.xz ./")
