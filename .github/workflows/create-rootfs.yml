@@ -27,7 +27,7 @@ jobs:
           name: popos-rootfs
           retention-days: 1
           path: |
-            ./popos-rootfs.tar.xz
+            /tmp/pop-os/popos-rootfs.tar.xz
 
   create-release:
     runs-on: ubuntu-22.04
