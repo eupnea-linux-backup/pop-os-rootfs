@@ -21,23 +21,6 @@ jobs:
       - name: Unpacking + Repacking popos rootfs
         run: sudo python3 unpack_iso.py
 
-      - name: Uploading rootfs as artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: popos-rootfs
-          retention-days: 1
-          path: |
-            /tmp/pop-os/popos-rootfs.tar.xz
-
-  create-release:
-    runs-on: ubuntu-22.04
-    needs: unpack-rootfs
-    steps:
-      - name: Downloading rootfs artifacts
-        uses: actions/download-artifact@v3
-        with:
-          path: /tmp/artifacts/
-
       - name: Generating release tag
         id: tag
         run: |
@@ -52,4 +35,4 @@ jobs:
             These are completely **unmodified** popos rootfs archives for the depthboot builder script.  
             Please download official images at https://pop.system76.com/
           files: |
-            /tmp/artifacts/popos-rootfs/popos-rootfs.tar.xz
+            /tmp/pop-os/popos-rootfs.tar.xz
