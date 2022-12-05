@@ -19,7 +19,7 @@ jobs:
         run: sudo apt-get install -y curl squashfs-tools
 
       - name: Unpacking + Repacking popos rootfs
-        run: sudo python3 unpack_iso.py
+        run: sudo bash unpack_iso.sh
 
       - name: Generating release tag
         id: tag
