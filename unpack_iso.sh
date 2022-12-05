@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 echo "Preparing system"
 mkdir -p "/tmp/pop-os/cdrom"
 mkdir "/tmp/pop-os/rootfs"
