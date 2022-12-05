@@ -10,6 +10,8 @@ sudo modprobe isofs
 echo "Downloading pop-os iso"
 curl -L https://iso.pop-os.org/22.04/amd64/intel/17/pop-os_22.04_amd64_intel_17.iso -o /tmp/pop-os/pop-os.iso
 
+ls -a /tmp/pop-os
+
 echo "Mounting popos iso"
 ISO_MNT=$("losetup -f --show /tmp/pop-os/pop-os.iso")
 mount "$ISO_MNT" /tmp/pop-os/cdrom
