@@ -9,7 +9,7 @@ sudo modprobe isofs
 
 echo "Downloading pop-os iso"
 pop_link=$(curl 'https://api.pop-os.org/builds/22.04/intel?arch=amd64' -H 'User-Agent: Mozilla/5.0 (Windows NT 10.0; rv:107.0) Gecko/20100101 Firefox/107.0' | jq -r ".url")
-curl -L pop_link -o /tmp/pop-os/pop-os.iso
+curl -L $pop_link -o /tmp/pop-os/pop-os.iso
 
 echo "Mounting popos iso"
 ISO_MNT=$(losetup -f --show /tmp/pop-os/pop-os.iso)
