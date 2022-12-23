@@ -23,6 +23,17 @@ unsquashfs -f -d /tmp/pop-os/rootfs /tmp/pop-os/cdrom/casper/filesystem.squashfs
 echo "Updating all packages inside rootfs"
 chroot /tmp/pop-os/rootfs /bin/bash -c "apt update -y && apt upgrade -y"
 
+echo "Cleaning rootfs"
+# Clean rootfs of temporary files to reduce its size
+rm -rf /mnt/depthboot/tmp
+rm -rf /mnt/depthboot/var/tmp
+rm -rf /mnt/depthboot/var/cache
+rm -rf /mnt/depthboot/proc
+rm -rf /mnt/depthboot/run
+rm -rf /mnt/depthboot/sys
+rm -rf /mnt/depthboot/lost+found
+rm -rf /mnt/depthboot/dev
+
 echo "Compressing rootfs"
 cd "/tmp/pop-os/rootfs"
 tar -cv -I 'xz -9 -T0' -f ../popos-rootfs.tar.xz ./
