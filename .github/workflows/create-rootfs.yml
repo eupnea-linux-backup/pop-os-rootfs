@@ -1,4 +1,4 @@
-name: Unsquashing + releasing pop os rootfs
+name: Unsquashing + releasing pop-os rootfs
 on:
   push:
     branches: [ "main" ]
@@ -18,7 +18,7 @@ jobs:
       - name: Installing dependencies
         run: sudo apt-get install -y curl squashfs-tools
 
-      - name: Unpacking + Repacking popos rootfs
+      - name: Unpacking + Repacking pop-os rootfs
         run: sudo bash unpack_iso.sh
 
       - name: Generating release tag
@@ -30,9 +30,9 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           tag_name: ${{ steps.tag.outputs.release_tag }}
-          name: Automated PopOS rootfs extraction - ${{ steps.tag.outputs.release_tag }}
+          name: Automated Pop!_OS rootfs extraction - ${{ steps.tag.outputs.release_tag }}
           body: |
-            These are completely **unmodified** popos rootfs archives for the depthboot builder script.  
+            These are completely **unmodified** pop-os rootfs archives for the depthboot builder script.  
             Please download official images at https://pop.system76.com/
           files: |
-            /tmp/pop-os/popos-rootfs.tar.xz
+            /tmp/pop-os/pop-os-rootfs.tar.xz
