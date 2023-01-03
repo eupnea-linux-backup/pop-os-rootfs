@@ -13,11 +13,11 @@ pop_link=$(curl 'https://api.pop-os.org/builds/22.04/intel?arch=amd64' -H 'User-
 # Download image with latest link
 curl -L "$pop_link" -o /tmp/pop-os/pop-os.iso
 
-echo "Mounting popos iso"
+echo "Mounting pop-os iso"
 ISO_MNT=$(losetup -f --show /tmp/pop-os/pop-os.iso)
 mount "$ISO_MNT" /tmp/pop-os/cdrom
 
-echo "Extracting popos squashfs"
+echo "Extracting pop-os squashfs"
 unsquashfs -f -d /tmp/pop-os/rootfs /tmp/pop-os/cdrom/casper/filesystem.squashfs
 
 echo "Updating all packages inside rootfs"
@@ -36,4 +36,4 @@ rm -rf /mnt/depthboot/dev
 
 echo "Compressing rootfs"
 cd "/tmp/pop-os/rootfs"
-tar -cv -I 'xz -9 -T0' -f ../popos-rootfs.tar.xz ./
+tar -cv -I 'xz -9 -T0' -f ../pop-os-rootfs.tar.xz ./
