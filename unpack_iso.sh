@@ -36,4 +36,4 @@ rm -rf /mnt/depthboot/dev
 
 echo "Compressing rootfs"
 cd "/tmp/pop-os/rootfs"
-tar -cv -I 'xz -9 -T0' -f ../pop-os-rootfs.tar.xz ./
+tar -cv -I 'xz -9 -T0' -f ../pop-os-rootfs-22.04.tar.xz ./
