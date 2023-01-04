@@ -35,4 +35,4 @@ jobs:
             These are completely **unmodified** pop-os rootfs archives for the depthboot builder script.  
             Please download official images at https://pop.system76.com/
           files: |
-            /tmp/pop-os/pop-os-rootfs.tar.xz
+            /tmp/pop-os/pop-os-rootfs-22.04.tar.xz
