@@ -24,7 +24,8 @@ jobs:
       - name: Generating release tag
         id: tag
         run: |
-          echo "::set-output name=release_tag::$(date +"%Y.%m.%d_%H-%M")"
+          date=$(date +"%Y.%m.%d_%H-%M")
+          echo "release_tag=$date" >> $GITHUB_OUTPUT
 
       - name: Creating new release
         uses: softprops/action-gh-release@v1
@@ -36,3 +37,4 @@ jobs:
             Please download official images at https://pop.system76.com/
           files: |
             /tmp/pop-os/pop-os-rootfs-22.04.tar.xz
+            /tmp/pop-os/pop-os-rootfs-22.04.sha256
