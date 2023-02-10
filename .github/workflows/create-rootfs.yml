@@ -8,7 +8,7 @@ on:
 
 jobs:
   unpack-rootfs:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
       - name: Checking out repository code
         uses: actions/checkout@v3
