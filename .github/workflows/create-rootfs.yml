@@ -21,6 +21,9 @@ jobs:
       - name: Unpacking + Repacking pop-os rootfs
         run: sudo bash unpack_iso.sh
 
+      - name: Splitting tar archive
+        run: split --verbose -b 1900MB /tmp/pop-os/pop-os-rootfs-22.04.tar.xz pop-os-rootfs-22.04.split.
+
       - name: Generating release tag
         id: tag
         run: |
@@ -36,5 +39,5 @@ jobs:
             These are completely **unmodified** pop-os rootfs archives for the depthboot builder script.  
             Please download official images at https://pop.system76.com/
           files: |
-            /tmp/pop-os/pop-os-rootfs-22.04.tar.xz
+            /tmp/pop-os/pop-os-rootfs-22.04.split.*
             /tmp/pop-os/pop-os-rootfs-22.04.sha256

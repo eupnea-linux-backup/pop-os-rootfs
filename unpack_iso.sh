@@ -39,4 +39,4 @@ cd "/tmp/pop-os/rootfs"
 tar -cv -I 'xz -9 -T0' -f ../pop-os-rootfs-22.04.tar.xz ./
 
 echo "Calculating sha256sum"
-sha256sum ../pop-os-rootfs-22.04.tar.xz > ../pop-os-rootfs-22.04.sha256sum
+sha256sum ../pop-os-rootfs-22.04.tar.xz > ../pop-os-rootfs-22.04.sha256
