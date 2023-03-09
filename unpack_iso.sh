@@ -23,13 +23,13 @@ unsquashfs -f -d /tmp/pop-os/rootfs /tmp/pop-os/cdrom/casper/filesystem.squashfs
 echo "Cleaning rootfs"
 # Remove unneeded/temporary files to reduce the rootfs size
 rm -rf /mnt/depthboot/boot/*
-rm -rf /mnt/depthboot/dev/*
+#rm -rf /mnt/depthboot/dev/*
 rm -rf /mnt/depthboot/lost+found/*
 rm -rf /mnt/depthboot/media/*
 rm -rf /mnt/depthboot/mnt/*
-rm -rf /mnt/depthboot/proc/*
-rm -rf /mnt/depthboot/run/*
-rm -rf /mnt/depthboot/sys/*
+#rm -rf /mnt/depthboot/proc/*
+#rm -rf /mnt/depthboot/run/*
+#rm -rf /mnt/depthboot/sys/*
 rm -rf /mnt/depthboot/tmp/*
 rm -rf /mnt/depthboot/var/tmp
 rm -rf /mnt/depthboot/var/cache
