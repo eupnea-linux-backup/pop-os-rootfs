@@ -20,8 +20,8 @@ mount "$ISO_MNT" /tmp/pop-os/cdrom
 echo "Extracting pop-os squashfs"
 unsquashfs -f -d /tmp/pop-os/rootfs /tmp/pop-os/cdrom/casper/filesystem.squashfs
 
-echo "Updating all packages inside rootfs"
-chroot /tmp/pop-os/rootfs /bin/bash -c "apt update -y && apt upgrade -y"
+# echo "Updating all packages inside rootfs"
+# chroot /tmp/pop-os/rootfs /bin/bash -c "apt update -y && apt upgrade -y"
 
 echo "Cleaning rootfs"
 # Remove unneeded/temporary files to reduce the rootfs size
