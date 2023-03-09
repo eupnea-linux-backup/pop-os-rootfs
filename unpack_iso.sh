@@ -32,7 +32,7 @@ rm -rf /mnt/depthboot/mnt/*
 #rm -rf /mnt/depthboot/sys/*
 rm -rf /mnt/depthboot/tmp/*
 rm -rf /mnt/depthboot/var/tmp
-rm -rf /mnt/depthboot/var/cache
+#rm -rf /mnt/depthboot/var/cache
 
 
 echo "Compressing rootfs"
