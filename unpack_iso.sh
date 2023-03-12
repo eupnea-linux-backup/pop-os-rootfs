@@ -31,7 +31,7 @@ rm -rf /tmp/pop-os/rootfs/mnt/*
 #rm -rf /tmp/pop-os/rootfs/run/*
 #rm -rf /tmp/pop-os/rootfs/sys/*
 rm -rf /tmp/pop-os/rootfs/tmp/*
-rm -rf /tmp/pop-os/rootfs/var/tmp
+rm -rf /tmp/pop-os/rootfs/var/tmp/*
 #rm -rf /tmp/pop-os/rootfs/var/cache
 
 
