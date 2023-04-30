@@ -1,4 +1,4 @@
-name: Unsquashing + releasing pop-os rootfs
+name: Unsquashing + repacking liveOS rootfs'
 on:
   push:
     branches: [ "main" ]
