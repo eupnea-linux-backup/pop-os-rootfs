@@ -7,7 +7,10 @@ on:
   workflow_dispatch:
 
 jobs:
-  unpack-rootfs:
+  repack-iso:
+    strategy:
+      matrix:
+        distro: [ "pop-os", "mint-cinnamon" ]
     runs-on: ubuntu-latest
     steps:
       - name: Checking out repository code
@@ -18,11 +21,29 @@ jobs:
       - name: Installing dependencies
         run: sudo apt-get install -y curl squashfs-tools
 
-      - name: Unpacking + Repacking pop-os rootfs
-        run: sudo bash unpack_iso.sh
+      - name: Repacking ${{ matrix.distro }} rootfs
+        run: sudo bash extract_rootfs.sh ${{ matrix.distro }}
 
       - name: Splitting tar archive
-        run: sudo split --verbose -b 1900MB /tmp/pop-os/pop-os-rootfs-22.04.tar.xz /tmp/pop-os/pop-os-rootfs-22.04.split.
+        run: sudo split --verbose -b 1900MB /tmp/distro/${{ matrix.distro }}-rootfs-22.04.tar.xz /tmp/distro/${{ matrix.distro }}-rootfs-22.04.split.
+
+      - name: Uploading ${{ matrix.distro }} rootfs as artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ matrix.distro }}
+          retention-days: 1
+          path: |
+            /tmp/distro/${{ matrix.distro }}-rootfs-22.04.split.*
+            /tmp/distro/${{ matrix.distro }}-rootfs-22.04.sha256
+
+  create-release:
+    runs-on: ubuntu-latest
+    needs: bootstrap-rootfs
+    steps:
+      - name: Downloading rootfs artifacts
+        uses: actions/download-artifact@v3
+        with:
+          path: /tmp/artifacts/
 
       - name: Generating release tag
         id: tag
@@ -34,10 +55,11 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           tag_name: ${{ steps.tag.outputs.release_tag }}
-          name: Automated Pop!_OS rootfs extraction - ${{ steps.tag.outputs.release_tag }}
+          name: Automated LiveOS rootfs extraction - ${{ steps.tag.outputs.release_tag }}
           body: |
-            These are completely **unmodified** pop-os rootfs archives for the depthboot builder script.  
-            Please download official images at https://pop.system76.com/
+            These are completely **unmodified** liveos rootfs archives for the depthboot builder script.  
+            * Please download official Pop!_OS isos at https://pop.system76.com/
+            * Please download official Linux Mint isos at https://linuxmint.com/download.php
           files: |
-            /tmp/pop-os/pop-os-rootfs-22.04.split.*
-            /tmp/pop-os/pop-os-rootfs-22.04.sha256
+            /tmp/artifacts/*/*-rootfs-22.04.split.*
+            /tmp/artifacts/*/*-rootfs-22.04.sha256
