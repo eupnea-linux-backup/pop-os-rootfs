@@ -10,7 +10,8 @@ jobs:
   repack-iso:
     strategy:
       matrix:
-        distro: [ "pop-os", "mint-cinnamon" ]
+        # distro: [ "pop-os", "mint-cinnamon" ]
+        distro: [ "pop-os" ]
     runs-on: ubuntu-latest
     steps:
       - name: Checking out repository code
