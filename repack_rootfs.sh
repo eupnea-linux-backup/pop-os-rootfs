@@ -4,7 +4,7 @@ set -e
 
 if [ -z "$1" ]; then
   echo "Distro not provided"
-  echo "Usage: extract_rootfs.sh <distro>"
+  echo "Usage: repack_rootfs.sh <distro>"
   echo "For example: extract_rootfs pop-os"
   echo "Supported distros: pop-os, mint-cinnamon"
   exit 1
@@ -52,4 +52,6 @@ cd "/tmp/distro/rootfs"
 tar -cv -I 'xz -9 -T0' -f "../$1-rootfs-22.04.tar.xz" ./ # both distros use 22.04
 
 echo "Calculating sha256sum"
-sha256sum "../$1-rootfs-22.04.tar.xz" >"../$1-rootfs-22.04.sha256" # both distros use 22.04
+# go to where the rootfs is. Using ../ results in broken sha256sum checkfiles
+cd ..
+sha256sum "$1-rootfs-22.04.tar.xz" >"$1-rootfs-22.04.sha256" # both distros use 22.04
